@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0809">
+<meta name="description" content="დემეს სასიყვარულო წერილი ნინისთვის.">
+<title>ჩემო ნინი… — დემე × ნინი</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Noto+Serif+Georgian:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0809;
+  --bg2:#140b0c;
+  --wine:#571c2b;
+  --gold:#d8b77d;
+  --cream:#f3e2c4;
+  --muted:#c4a88b;
+  --ink:#38251a;
+  --paper:#d9bc92;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:25px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--cream);
+  font-family:"Noto Serif Georgian",serif;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:50;
+  pointer-events:none;
+  opacity:.09;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+button{font:inherit}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
+::selection{background:#7d3743;color:#fff}
+
+/* MUSIC */
+.music{
+  position:fixed;
+  z-index:60;
+  top:16px;
+  left:15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 13px 8px 8px;
+  background:#100907dc;
+  border:1px solid #d8b77d55;
+  border-radius:40px;
+  backdrop-filter:blur(8px);
+}
+.music-toggle{
+  width:37px;
+  height:37px;
+  flex-shrink:0;
+  border:1px solid var(--gold);
+  border-radius:50%;
+  color:var(--gold);
+  background:transparent;
+  cursor:pointer;
+}
+.music-info{font-size:10px;color:var(--cream)}
+.music-line{
+  height:2px;
+  width:85px;
+  background:#604633;
+  margin-top:6px;
+  overflow:hidden;
+}
+.music-progress{
+  height:100%;
+  width:0;
+  background:var(--gold);
+}
+.music.playing .music-toggle{box-shadow:0 0 20px #d8b77d44}
+
+/* CINEMATIC HERO */
+.hero{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  isolation:isolate;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(9,7,9,.12),rgba(12,8,10,.25) 50%,#0b0809 100%),
+    url("https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=2200&q=90")
+    center 48%/cover no-repeat;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(ellipse at 50% 43%,transparent 0%,rgba(12,7,10,.18) 43%,rgba(8,5,7,.7) 100%),
+    linear-gradient(90deg,rgba(10,6,8,.25),transparent 45%,rgba(10,6,8,.25));
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  left:7%;
+  right:7%;
+  bottom:24px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#d7b47c99,transparent);
+}
+.hero-content{
+  position:relative;
+  max-width:760px;
+  padding:110px 24px 85px;
+  animation:letterArrival 2s cubic-bezier(.2,.7,.2,1) both;
+}
+.hero-content::before{
+  content:"";
+  position:absolute;
+  inset:12% -8%;
+  z-index:-1;
+  background:radial-gradient(ellipse,rgba(12,7,10,.48),transparent 72%);
+  pointer-events:none;
+}
+.monogram{
+  font-family:"Caveat",cursive;
+  font-size:58px;
+  color:#f1d5a3;
+  text-shadow:0 0 35px #d7b47c44;
+  animation:softGlow 4s ease-in-out infinite;
+}
+.names{
+  font-family:"Caveat",cursive;
+  font-size:clamp(27px,5vw,36px);
+  letter-spacing:4px;
+  color:#f2d8ac;
+  margin-top:18px;
+}
+.ornament{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:13px;
+  margin:18px auto;
+  color:var(--gold);
+}
+.ornament span{
+  height:1px;
+  width:65px;
+  background:linear-gradient(90deg,transparent,var(--gold));
+}
+.ornament span:last-child{transform:rotate(180deg)}
+.eyebrow{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#e3c28f;
+  margin:30px 0 15px;
+}
+.hero h1{
+  margin:0;
+  font-family:"Caveat",cursive;
+  font-weight:500;
+  font-size:clamp(65px,12vw,112px);
+  line-height:1.08;
+  color:#f7e5c5;
+  text-shadow:0 4px 35px #000,0 0 55px #c9a06c33;
+  animation:titleReveal 1.5s .3s both;
+}
+.hero p{
+  font-size:13px;
+  line-height:2.4;
+  color:#f0dcc2;
+  text-shadow:0 2px 15px #000;
+  margin:28px auto;
+}
+.open-letter{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:13px;
+  margin-top:16px;
+  padding:16px 29px;
+  border:1px solid #d7b47caa;
+  background:linear-gradient(135deg,#291712dd,#100907dd);
+  color:#f5dfbd;
+  box-shadow:0 0 0 5px #d7b47c0b,0 12px 35px #0005;
+  cursor:pointer;
+  transition:transform .4s,box-shadow .4s,background .4s;
+  font-size:12px;
+}
+.open-letter::before{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border:1px solid #d7b47c35;
+  pointer-events:none;
+}
+.open-letter:hover{
+  transform:translateY(-4px);
+  background:linear-gradient(135deg,#54202b,#170c0b);
+  box-shadow:0 0 30px #d7b47c26,0 14px 35px #0007;
+}
+.down{
+  display:block;
+  margin-top:40px;
+  color:var(--gold);
+  font-size:22px;
+  animation:bob 2s infinite;
+}
+
+/* LETTER */
+.section{position:relative;padding:100px 20px}
+.section-heading{text-align:center;margin-bottom:45px}
+.section-heading h2{
+  font:500 clamp(37px,7vw,58px) "Caveat",cursive;
+  color:var(--gold);
+  margin:0;
+}
+.section-heading p{
+  font-size:11px;
+  letter-spacing:1px;
+  line-height:2;
+  color:var(--muted);
+}
+.letter-section{
+  background:
+    radial-gradient(ellipse at 10% 30%,#461b1866,transparent 45%),
+    radial-gradient(ellipse at 90% 80%,#36171966,transparent 40%),
+    #100907;
+}
+.paper{
+  position:relative;
+  max-width:760px;
+  margin:auto;
+  padding:clamp(28px,6vw,65px);
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse at 20% 20%,#fff3ce88,transparent 50%),
+    radial-gradient(ellipse at 90% 90%,#8b512744,transparent 45%),
+    repeating-linear-gradient(0deg,#6e47220a 0px,#6e47220a 1px,transparent 1px,transparent 5px),
+    #d9bc91;
+  box-shadow:0 25px 90px #0009,0 0 0 7px #a77b4920;
+  transform:rotate(-.5deg);
+}
+.paper::before{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px solid #78513255;
+  pointer-events:none;
+}
+.paper::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.3;
+  background:radial-gradient(ellipse at center,transparent 45%,#70452144 100%);
+}
+.paper-content{position:relative;z-index:1}
+.paper .greeting{
+  font:600 39px "Caveat",cursive;
+  margin:0 0 25px;
+  color:#572b22;
+}
+.paper p{
+  font-size:13px;
+  line-height:2.35;
+  margin:0 0 19px;
+  color:#442d20;
+}
+.paper .highlight{
+  display:block;
+  text-align:center;
+  font:600 clamp(24px,5vw,35px) "Caveat",cursive;
+  color:#782e32;
+  padding:12px 0;
+  margin:24px 0 0;
+  border-top:1px solid #895a4044;
+  border-bottom:1px solid #895a4044;
+}
+.paper-sign{
+  font:500 30px "Caveat",cursive;
+  text-align:right;
+  margin-top:25px;
+  color:#602c28;
+}
+.stamp{
+  position:absolute;
+  right:24px;
+  bottom:20px;
+  font-size:33px;
+  color:#8e4a3b66;
+  transform:rotate(16deg);
+}
+
+/* LILY DECOR */
+.lily-divider{
+  position:relative;
+  text-align:center;
+  padding:25px 10px;
+  color:#ead5af;
+  font-size:25px;
+}
+.lily-divider span{
+  display:inline-block;
+  margin:0 12px;
+  width:55px;
+  height:1px;
+  vertical-align:middle;
+  background:linear-gradient(90deg,transparent,#c8a56e);
+}
+.lily-divider span:last-child{transform:rotate(180deg)}
+
+/* MEMORIES */
+.memories{
+  background:
+    linear-gradient(#100907dc,#100907e8),
+    url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1800&q=80")
+    center/cover fixed;
+  border-top:1px solid #bd905744;
+  border-bottom:1px solid #bd905744;
+}
+.memory-grid{
+  max-width:900px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
+}
+.memory{margin:0;text-align:center}
+.photo{
+  aspect-ratio:4/5;
+  padding:9px;
+  background:#dfc69d;
+  box-shadow:0 12px 38px #0008;
+  transform:rotate(-2deg);
+  transition:transform .6s;
+}
+.memory:nth-child(2) .photo{transform:rotate(2deg)}
+.memory:nth-child(3) .photo{transform:rotate(1.5deg)}
+.memory:nth-child(4) .photo{transform:rotate(-1deg)}
+.memory:hover .photo{transform:rotate(0) translateY(-5px)}
+.photo img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  filter:sepia(.15) saturate(.8);
+}
+.memory figcaption{
+  font:500 24px "Caveat",cursive;
+  color:var(--gold);
+  margin-top:17px;
+}
+.memory-note{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  line-height:2;
+  margin-top:32px;
+}
+
+/* FINAL */
+.promise{
+  min-height:75vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:95px 23px;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(#100907b5,#100907e8),
+    url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+.promise-content{max-width:650px}
+.promise h2{
+  font:500 clamp(43px,8vw,75px) "Caveat",cursive;
+  color:#f0d1a0;
+  margin:0 0 24px;
+}
+.promise p{
+  font-size:13px;
+  line-height:2.4;
+  color:#e8d1b7;
+}
+.big-heart{
+  font-size:33px;
+  color:#e8d3b0;
+  margin:28px 0;
+  display:inline-block;
+  animation:heartbeat 2.4s infinite;
+}
+.promise .final-line{
+  font:500 clamp(28px,6vw,42px) "Caveat",cursive;
+  color:var(--gold);
+  line-height:1.5;
+}
+footer{
+  text-align:center;
+  padding:38px 20px 45px;
+  background:#0b0706;
+  border-top:1px solid #d7b47c33;
+}
+footer .hand{font-size:28px;color:var(--gold)}
+footer p{font-size:10px;color:#9e8067;letter-spacing:1px}
+footer .heart{color:#e0c69c}
+
+/* PETALS */
+.petal{
+  position:fixed;
+  top:-30px;
+  z-index:45;
+  pointer-events:none;
+  width:12px;
+  height:20px;
+  border-radius:90% 5% 90% 5%;
+  background:linear-gradient(135deg,#fff9e9,#c6b59c 55%,#76624e);
+  box-shadow:0 0 9px #f5e3c422;
+  opacity:.65;
+  animation:fall linear forwards;
+}
+
+/* SCROLL REVEALS */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 1s,transform 1s;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+@keyframes letterArrival{
+  from{opacity:0;transform:translateY(35px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes titleReveal{
+  from{opacity:0;letter-spacing:8px;filter:blur(5px)}
+  to{opacity:1;letter-spacing:0;filter:blur(0)}
+}
+@keyframes softGlow{
+  0%,100%{text-shadow:0 0 15px #d7b47c22}
+  50%{text-shadow:0 0 35px #d7b47c66}
+}
+@keyframes bob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(8px)}
+}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  15%{transform:scale(1.13)}
+  30%{transform:scale(1)}
+  45%{transform:scale(1.1)}
+}
+@keyframes fall{
+  to{
+    transform:translate3d(var(--drift),110vh,0) rotate(650deg);
+    opacity:0;
+  }
+}
+
+@media(min-width:760px){
+  .memory-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+  .section{padding:125px 30px}
+}
+@media(max-width:420px){
+  .music{top:10px;left:10px}
+  .hero-content{padding:105px 20px 80px}
+  .hero h1{font-size:59px}
+  .hero p{font-size:12px}
+  .paper{padding:32px 25px}
+  .paper p{font-size:12px;line-height:2.2}
+  .memory-grid{gap:15px}
+  .memory figcaption{font-size:21px}
+  .section{padding:78px 17px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="musicAudio" src="music.mp3" autoplay loop playsinline preload="auto"></audio>
+
+<div class="music" id="musicWidget">
+  <button class="music-toggle" id="musicToggle" aria-label="მუსიკის ჩართვა">▶</button>
+  <div class="music-info">
+    <div id="musicLabel">ჩვენი სიმღერა ♡</div>
+    <div class="music-line">
+      <div class="music-progress" id="musicProgress"></div>
+    </div>
+  </div>
+</div>
+
+<header class="hero" id="home">
+  <div class="hero-content">
+    <div class="monogram">♡</div>
+    <div class="names">დემე <span style="color:#b18c5c">×</span> ნინი</div>
+    <div class="ornament"><span></span> ♡ <span></span></div>
+    <div class="eyebrow">პატარა წერილი, დიდი გრძნობა</div>
+    <h1>ჩემო ნინი…</h1>
+    <p>
+      ამ პატარა სამყაროს შენთვის გჩუქნი…<br>
+      რომ ყოველთვის გახსოვდეს, რას გრძნობს<br>
+      ჩემი გული შენ მიმართ.
+    </p>
+    <button class="open-letter" id="openLetter">
+      <span>გახსენი ჩემი წერილი</span><span>♡</span>
+    </button>
+    <div class="lily-divider"><span></span>✧<span></span></div>
+    <span class="down" aria-hidden="true">⌄</span>
+  </div>
+</header>
+
+<main>
+  <section class="section letter-section" id="letter">
+    <div class="section-heading reveal">
+      <h2>რამდენიმე სიტყვა გულიდან</h2>
+      <div class="ornament"><span></span> ♡ <span></span></div>
+      <p>დაწერილი შენთვის, მთელი გულით.</p>
+    </div>
+
+    <article class="paper reveal">
+      <div class="paper-content">
+        <h2 class="greeting">ჩემო ნინი,</h2>
+
+        <p>
+          ზოგჯერ სიტყვები ძალიან პატარაა იმისთვის,
+          რომ ყველაფერი გადმოსცეს, რასაც შენ მიმართ ვგრძნობ.
+          მაინც მინდა, ეს წერილი შენთან დარჩეს და ნებისმიერ დღეს
+          შეგახსენოს, რამდენად ძვირფასი ხარ ჩემთვის.
+        </p>
+
+        <p>
+          შენ ჩემთვის მხოლოდ ერთი ადამიანი არ ხარ.
+          შენ ხარ ადამიანი, რომლის გახსენებაც ღიმილს მგვრის,
+          რომლის ერთი სიტყვაც შეიძლება მთელ დღეს მიხალისებდეს
+          და რომლის არსებობაც ჩემს სამყაროს უფრო თბილს ხდის.
+        </p>
+
+        <p>
+          არ გპირდები, რომ ყოველი დღე იდეალური იქნება.
+          მაგრამ მინდა, ყოველთვის გახსოვდეს, რომ შენს გრძნობებს
+          მნიშვნელობა აქვს, შენი ღიმილი მიხარია და შენთან
+          დაკავშირებული ყოველი პატარა მომენტი ჩემთვის ძვირფასია.
+        </p>
+
+        <p>
+          თუ ოდესმე დაგავიწყდება, რამდენს ნიშნავ ჩემთვის,
+          უბრალოდ დაბრუნდი ამ წერილთან.
+          აქ ჩემი გულიდან წამოსული სიტყვები დაგხვდება.
+        </p>
+
+        <span class="highlight">შენ ჩემი საყვარელი ადამიანი ხარ. ♡</span>
+        <div class="paper-sign">სიყვარულით, შენი დემე ♡</div>
+      </div>
+      <span class="stamp" aria-hidden="true">♡</span>
+    </article>
+  </section>
+
+  <section class="section memories" id="memories">
+    <div class="section-heading reveal">
+      <h2>ჩვენი პატარა სამყარო</h2>
+      <div class="ornament"><span></span> ♡ <span></span></div>
+      <p>პატარა სილამაზეები, რომლებიც სიყვარულს გვახსენებს.</p>
+    </div>
+
+    <div class="memory-grid">
+      <figure class="memory reveal">
+        <div class="photo">
+          <img loading="lazy"
+            alt="თეთრი ყვავილები"
+            src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?auto=format&fit=crop&w=650&q=80">
+        </div>
+        <figcaption>შენნაირი სილამაზე</figcaption>
+      </figure>
+
+      <figure class="memory reveal">
+        <div class="photo">
+          <img loading="lazy"
+            alt="ვარსკვლავებით მოჭედილი ღამე"
+            src="https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=650&q=80">
+        </div>
+        <figcaption>უსასრულო ცა</figcaption>
+      </figure>
+
+      <figure class="memory reveal">
+        <div class="photo">
+          <img loading="lazy"
+            alt="მზის ჩასვლის თბილი ფერები"
+            src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=650&q=80">
+        </div>
+        <figcaption>თბილი მომენტები</figcaption>
+      </figure>
+
+      <figure class="memory reveal">
+        <div class="photo">
+          <img loading="lazy"
+            alt="რომანტიკული ბუნება"
+            src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=650&q=80">
+        </div>
+        <figcaption>პატარა სასწაული</figcaption>
+      </figure>
+    </div>
+
+    <p class="memory-note reveal">
+      ზოგჯერ ყველაზე ლამაზი საჩუქარი ძვირადღირებული არაფერია.<br>
+      ზოგჯერ ის უბრალოდ სიტყვებია, რომლებიც გულიდან მოდის.
+    </p>
+  </section>
+
+  <section class="promise" id="promise">
+    <div class="promise-content reveal">
+      <div class="eyebrow">თუ მხოლოდ ერთი რამ უნდა დაიმახსოვრო</div>
+
+      <h2>მინდა, ეს იცოდე…</h2>
+
+      <p>
+        სამყაროში უამრავი ლამაზი რამ არსებობს,<br>
+        მაგრამ ჩემთვის ყველაზე მნიშვნელოვანი ის გრძნობაა,<br>
+        რომელსაც შენთან ყოფნა და შენზე ფიქრი მაძლევს.
+      </p>
+
+      <p>
+        მადლობა, რომ ხარ.<br>
+        მადლობა იმ ღიმილისთვის, რომელსაც მაჩუქებ.<br>
+        და მადლობა ყველა პატარა მომენტისთვის,<br>
+        რომელიც ჩემთვის ძვირფას მოგონებად იქცევა.
+      </p>
+
+      <div class="big-heart">♡</div>
+
+      <div class="final-line">
+        თუ ამ წერილიდან მხოლოდ ერთი წინადადება<br>
+        დაგამახსოვრდება, მინდა ეს იყოს:
+      </div>
+
+      <div class="ornament"><span></span> ∞ <span></span></div>
+
+      <h2 style="font-size:clamp(42px,8vw,68px);margin:0">
+        ძალიან მიყვარხარ, ნინი.
+      </h2>
+
+      <div class="names">დემე × ნინი</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="hand">შენთვის, მთელი გულით <span class="heart">♥</span></div>
+  <p>შექმნილია სიყვარულით — დემესგან ნინისთვის</p>
+  <div style="color:#b58c58;font-size:20px;margin-top:15px">∞</div>
+</footer>
+
+<script>
+(() => {
+  const audio = document.getElementById('musicAudio');
+  const toggle = document.getElementById('musicToggle');
+  const widget = document.getElementById('musicWidget');
+  const label = document.getElementById('musicLabel');
+  const progress = document.getElementById('musicProgress');
+  const openLetter = document.getElementById('openLetter');
+
+  let isPlaying = false;
+  let playRequestPending = false;
+
+  function updateMusicUI(playing) {
+    isPlaying = playing;
+    toggle.textContent = playing ? 'Ⅱ' : '▶';
+    toggle.setAttribute(
+      'aria-label',
+      playing ? 'მუსიკის შეჩერება' : 'მუსიკის ჩართვა'
+    );
+    widget.classList.toggle('playing', playing);
+
+    if (playing) {
+      label.textContent = 'სიყვარულის მელოდია ♡';
+    }
+  }
+
+  async function startMusic() {
+    if (playRequestPending || !audio.paused) return;
+
+    playRequestPending = true;
+
+    try {
+      await audio.play();
+      updateMusicUI(true);
+    } catch (error) {
+      updateMusicUI(false);
+      label.textContent = 'შეეხე ▶ ღილაკს მუსიკისთვის';
+    } finally {
+      playRequestPending = false;
+    }
+  }
+
+  function toggleMusic() {
+    if (!audio.paused) {
+      audio.pause();
+      return;
+    }
+
+    startMusic();
+  }
+
+  /* მუსიკის ჩართვის მცდელობა საიტის გახსნისთანავე */
+  startMusic();
+
+  /* თუ ბრაუზერი ავტომატურ დაკვრას დაბლოკავს,
+     პირველი შეხება ხელახლა სცდის ჩართვას. */
+  document.addEventListener('pointerdown', function firstInteraction() {
+    if (audio.paused) startMusic();
+    document.removeEventListener('pointerdown', firstInteraction);
+  }, { once: true, passive: true });
+
+  toggle.addEventListener('click', toggleMusic);
+
+  openLetter.addEventListener('click', () => {
+    document.getElementById('letter').scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'auto'
+        : 'smooth'
+    });
+
+    if (audio.paused) startMusic();
+  });
+
+  audio.addEventListener('play', () => {
+    updateMusicUI(true);
+  });
+
+  audio.addEventListener('pause', () => {
+    updateMusicUI(false);
+    label.textContent = 'ჩვენი სიმღერა ♡';
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+      progress.style.width =
+        (audio.currentTime / audio.duration * 100) + '%';
+    }
+  });
+
+  audio.addEventListener('error', () => {
+    updateMusicUI(false);
+    label.textContent = 'შეამოწმე music.mp3';
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+
+  const reducedMotion =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reducedMotion) {
+    let lastPetal = 0;
+
+    function createPetal(now) {
+      if (now - lastPetal > 850) {
+        lastPetal = now;
+
+        const petal = document.createElement('span');
+        petal.className = 'petal';
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.setProperty(
+          '--drift',
+          (Math.random() * 160 - 80) + 'px'
+        );
+        petal.style.animationDuration =
+          (8 + Math.random() * 7) + 's';
+        petal.style.opacity =
+          (0.25 + Math.random() * 0.4).toFixed(2);
+
+        document.body.appendChild(petal);
+
+        petal.addEventListener(
+          'animationend',
+          () => petal.remove(),
+          { once: true }
+        );
+      }
+
+      requestAnimationFrame(createPetal);
+    }
+
+    requestAnimationFrame(createPetal);
+  }
+})();
+</script>
+</body>
+</html>
